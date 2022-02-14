@@ -2,21 +2,21 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
+	"time"
 )
 
+const (
+	width  = 10
+	height = 10
+)
+
+type field [width][height]int
+
+var box field
+
 func main() {
-	box := [10][10]int{
-		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-		{1, 0, 1, 1, 1, 1, 1, 1, 0, 1},
-		{1, 0, 1, 1, 1, 1, 1, 1, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 1, 1, 1, 1, 1, 1, 0, 1},
-		{1, 0, 1, 1, 1, 1, 1, 1, 0, 1},
-		{1, 0, 1, 1, 1, 1, 1, 1, 0, 1},
-		{1, 0, 1, 1, 1, 1, 1, 1, 0, 1},
-		{1, 0, 1, 1, 1, 1, 1, 1, 0, 1},
-		{1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
-	}
+	initialize()
 
 	for _, row := range box {
 		for _, cell := range row {
@@ -27,5 +27,15 @@ func main() {
 			}
 		}
 		fmt.Println("")
+	}
+}
+
+func initialize() {
+	rand.Seed(time.Now().UnixNano())
+
+	for i := 0; i < height; i++ {
+		for j := 0; j < width; j++ {
+			box[i][j] = rand.Intn(2)
+		}
 	}
 }
