@@ -28,6 +28,10 @@ func main() {
 		}
 		fmt.Println("")
 	}
+
+	fmt.Println("")
+	fmt.Print("====================")
+	fmt.Println("")
 }
 
 func initialize() {
