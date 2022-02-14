@@ -9,6 +9,8 @@ import (
 const (
 	height = 22
 	width  = 62
+	clear  = "\033[2J"
+	head   = "\033[1;1H"
 )
 
 type field [height][width]int
@@ -19,34 +21,34 @@ func main() {
 	initialize()
 
 	for {
-		for _, row := range box {
-			for _, cell := range row {
-				if cell == 1 {
-					fmt.Print("■ ")
-				} else {
-					fmt.Print("  ")
-				}
-			}
-			fmt.Println("")
-		}
-
+		fmt.Print(head)
+		render()
 		update()
-
-		time.Sleep(time.Second)
-
-		fmt.Println("")
-		fmt.Print("====================")
-		fmt.Println("")
+		time.Sleep(time.Millisecond * 500)
 	}
 }
 
 func initialize() {
+	fmt.Print(clear)
 	rand.Seed(time.Now().UnixNano())
 
 	for i := 1; i < height-1; i++ {
 		for j := 1; j < width-1; j++ {
 			box[i][j] = rand.Intn(2)
 		}
+	}
+}
+
+func render() {
+	for _, row := range box {
+		for _, cell := range row {
+			if cell == 1 {
+				fmt.Print("■ ")
+			} else {
+				fmt.Print("  ")
+			}
+		}
+		fmt.Println("")
 	}
 }
 
