@@ -24,7 +24,7 @@ func main() {
 		fmt.Print(head)
 		render()
 		update()
-		time.Sleep(time.Millisecond * 500)
+		time.Sleep(time.Millisecond * 100)
 	}
 }
 
